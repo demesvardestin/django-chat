@@ -1,0 +1,79 @@
+{% extends "layouts.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row" style="margin-top: 60px; padding: 0 30px;">
+  {% if user.is_authenticated %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          chatrooms
+        </div>
+        <div class="card-body">
+          {% if chat_rooms %}
+            {% for chat_room in chat_rooms %}
+              <div class="conversation-box">
+                <a href="{% url 'chat_room_detail' chat_room.pk %}"
+                    style="height: 100% !important; width: 100% !important;">
+                    chatroom {{ chat_room.id }}
+                </a>
+              </div>
+            {% endfor %}
+          {% else %}
+            <p>no chatrooms yet</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          message a user
+        </div>
+        <div class="card-body">
+          {% for user in users %}
+            {% if user != current_user %}
+              <i class="far fa-user-circle"></i>
+              {{ user.username }}
+              {% if user.pk not in friendships %}
+                <a href="/users/follow?user_id={{ user.id }}" class="btn btn-primary btn-sm">
+                  Follow
+                </a>
+              {% else %}
+                <a href="/users/message?username={{ user.username }}" class="btn btn-success btn-sm">
+                  Message
+                </a>
+              {% endif %}
+              <hr>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="col-md-4 offset-md-4">
+      <div class="card">
+        <div class="card-header text-center">
+          welcome to django-chat!
+        </div>
+        <div class="card-body">
+          <a href="{% url 'login' %}" class="btn btn-primary btn-block">
+            login
+          </a>
+          <a href="{% url 'signup' %}" class="btn btn-success btn-block">
+            create an account
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<script type="text/javascript">
+  if (!window.location.href.includes('users/home')) {
+    window.location.replace('/users/home/');
+  }
+</script>
+
+{% endblock %}
