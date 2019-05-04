@@ -25,7 +25,7 @@ SECRET_KEY = '^)hs9y((0$wz&^3$#f7+)sjb2-4jke@&hgu3g=7o_99_mvl@)_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['brightest-django-chat.herokuapp.com']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -127,3 +128,7 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/users/home/'
 LOGOUT_REDIRECT_URL = '/users/home/'
 AUTH_USER_MODEL = 'users.CustomUser'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
