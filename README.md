@@ -5,7 +5,7 @@ django-chat is a small application built with django 1.9, which allows users
 to create an account, follow and message each other.
 
 Demo - [django-chat](https://brightest-django-chat.herokuapp.com "djangochat")
-![djangochat](https://github.com/demesvardestin/django-chat/raw/master/public/images/django_chat.png "djangochat")
+![djangochat](https://github.com/demesvardestin/django-chat/tree/master/static/images/django_chat.png "djangochat")
 
 ## Stack
 - django 1.9
