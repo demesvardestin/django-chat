@@ -40,6 +40,9 @@
                 {% if user.pk not in friendships %}
                   <a href="/users/follow?user_id={{ user.id }}" class="btn btn-primary btn-sm">
                     Follow
+                  </a> | 
+                  <a href="/users/message?username={{ user.username }}" class="btn btn-success btn-sm">
+                    Message
                   </a>
                 {% else %}
                   <a href="/users/message?username={{ user.username }}" class="btn btn-success btn-sm">
