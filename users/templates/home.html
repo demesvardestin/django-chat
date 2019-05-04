@@ -32,22 +32,24 @@
           message a user
         </div>
         <div class="card-body">
-          {% for user in users %}
-            {% if user != current_user %}
-              <i class="far fa-user-circle"></i>
-              {{ user.username }}
-              {% if user.pk not in friendships %}
-                <a href="/users/follow?user_id={{ user.id }}" class="btn btn-primary btn-sm">
-                  Follow
-                </a>
-              {% else %}
-                <a href="/users/message?username={{ user.username }}" class="btn btn-success btn-sm">
-                  Message
-                </a>
+          {% if users %}
+            {% for user in users %}
+              {% if user != current_user %}
+                <i class="far fa-user-circle"></i>
+                {{ user.username }}
+                {% if user.pk not in friendships %}
+                  <a href="/users/follow?user_id={{ user.id }}" class="btn btn-primary btn-sm">
+                    Follow
+                  </a>
+                {% else %}
+                  <a href="/users/message?username={{ user.username }}" class="btn btn-success btn-sm">
+                    Message
+                  </a>
+                {% endif %}
+                <hr>
               {% endif %}
-              <hr>
-            {% endif %}
-          {% endfor %}
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>
